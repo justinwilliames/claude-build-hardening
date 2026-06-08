@@ -36,7 +36,7 @@ The order is **load-bearing**. Don't rearrange. Engineering must come first beca
 
 | Stage | Reviewers | Lens | Why this order |
 |---|---|---|---|
-| **1. Engineering** | Architectural adversarial · Build-feasibility · Naive-user / first-principles | Will it actually work, is it actually buildable, would a real user understand it | First. UX work on a broken substrate is wasted. |
+| **1. Engineering** | Architectural adversarial · Build-feasibility · Naive-user / first-principles · *(+ domain practitioner when applicable)* | Will it actually work, is it actually buildable, would a real user understand it, would a working practitioner refuse the output | First. UX work on a broken substrate is wasted. |
 | **2. UX / Product** | Senior product designer · Interaction / motion designer · Domain-user emotional experience | Information architecture, motion design, the user's lived experience | Second. Substrate is locked; now design the surface. |
 | **3. Security** | Application security · Supply chain · Threat model | Credentials, attack surface, supply chain, render-layer hardening | Third. The actual attack surface depends on the substrate AND the surface. |
 | **4. Accessibility** | WCAG 2.1 AA · Colour vision deficiency · Screen-reader walkthrough | Inclusive design, contrast, ARIA, keyboard nav, CVD survival of state distinctions | Last. Presentation-layer concerns; design must exist before it can be made accessible. |
@@ -88,6 +88,14 @@ Each round uses **three different model families** for genuine perspective diver
 | C | **Codex GPT-5.5** (Bash subprocess via codex skill) | Different model family entirely. Catches things Claude misses. Best for naive-user / trader-experience / threat-model / screen-reader lenses. |
 
 Lose Codex availability? Substitute a second Sonnet subagent with strong adversarial framing. The methodology survives degraded model diversity but the diversity is where the real value lives.
+
+### Optional Reviewer D — Domain practitioner
+
+Engineering / Build / Naive-user / Security / A11y are all generalist lenses. They will not catch wrongness that is only visible to someone who has worked in the specialised domain for a decade — yardsticks that are wrong-period for the horizon, microstructure the spec ignores, behavioural realities at the point of use, event windows treated as instants, outputs a working practitioner would refuse on sight.
+
+When the spec is in a specialised practitioner domain (FX/trading, healthcare, legal, lifecycle marketing, field trades, sales — any domain where deep working knowledge changes which failure modes matter), add a 4th reviewer in the Engineering stage: **Reviewer D — Domain practitioner (Opus, in character)**. The canonical instance is **Eddie Carrington** (12-yr FX desk trader) for trading/forex/market-data specs. The prompt is parameterised — swap the persona block for other domains. See `references/engineering-prompts.md` for the full prompt and swap-in instructions for other practitioner archetypes.
+
+Fire Reviewer D in Round 1, Round 2 and Round 3 alongside A/B/C — the practitioner's view of "did the revisions actually fix the desk problem, or just the engineering problem" is the value-add. Skip it for general-purpose tooling, dev workflows, or specs with no specialised practitioner audience.
 
 ## Detailed prompts and workflow
 
