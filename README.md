@@ -25,7 +25,7 @@ The reviewers attack a **strengthened** spec each round, not just pile critique 
 
 Each round uses three different model families for genuine perspective diversity:
 
-- **Opus 4.7** — deepest reasoning, best for architectural and product-design lenses.
+- **Opus 4.8** — deepest reasoning, best for architectural and product-design lenses.
 - **Sonnet 4.6** — strong build-feasibility and interaction-design lens, faster than Opus.
 - **Codex GPT-5.5** — different model family entirely, catches things Claude misses. Best for naive-user / threat-model / screen-reader lenses.
 

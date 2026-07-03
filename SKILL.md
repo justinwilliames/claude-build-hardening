@@ -53,11 +53,13 @@ For each stage:
     Read their reports
     APPLY findings to the spec (the orchestrator does this — not the reviewers)
     Refresh the /tmp/spec-review-<stage>/SPEC.md copy
+    Show the user a per-round diff summary (what changed, what was deferred, any new findings introduced) and get explicit approval before launching Round 2.
 
   Round 2:
     Fan out 3 reviewers in parallel — same lenses, but the spec they review is now strengthened
     Reviewers' explicit mandate: confirm prior findings were properly addressed (not just papered), find new problems introduced by R1 changes, surface what's still weak
     Apply findings
+    Show the user a per-round diff summary (what changed, what was deferred, any new findings introduced) and get explicit approval before launching Round 3.
 
   Round 3:
     Final round — same lenses, spec twice-strengthened
@@ -83,7 +85,7 @@ Each round uses **three different model families** for genuine perspective diver
 
 | Slot | Model | Why |
 |---|---|---|
-| A | **Opus 4.7** (fresh subagent) | Deepest reasoning. Best for architectural and product-design lenses. |
+| A | **Opus 4.8** (fresh subagent) | Deepest reasoning. Best for architectural and product-design lenses. |
 | B | **Sonnet 4.6** (Agent with `model="sonnet"`) | Strong build-feasibility and interaction-design lens. Faster than Opus. |
 | C | **Codex GPT-5.5** (Bash subprocess via codex skill) | Different model family entirely. Catches things Claude misses. Best for naive-user / trader-experience / threat-model / screen-reader lenses. |
 
@@ -137,6 +139,7 @@ The skill is opinionated, not religious. Stop early if:
 - **Two consecutive reviewers in a row say "ship it" without significant findings.** The diminishing returns curve has bottomed out.
 - **The user explicitly says stop / pause / redirect.**
 - **An earlier stage produced a finding that changes the spec's foundational architecture.** Re-run earlier stages on the new architecture rather than continuing into UX/Security/A11y on an obsolete substrate.
+- **All three reviewers in a round mark the spec fundamentally broken** (not just a cluster of fixable findings, but a verdict that the underlying architecture or approach is unsound). In this case: stop the stage immediately, return the consensus finding to the user, and require a spec revision before re-running from Round 1 of that stage. Do not continue to the next round on a spec three reviewers have condemned.
 
 ## Output
 
@@ -147,6 +150,10 @@ The final deliverable is **the hardened spec itself** (modified in place), plus 
 - Top 3 findings that survived all rounds.
 - Single load-bearing remaining risk.
 - Ship-readiness verdict.
+
+## Sync homes
+
+Canonical: ~/.claude/skills/claude-build-hardening (private, live). Public sanitized twin: ~/code/claude-skills/claude-build-hardening → github.com/justinwilliames/claude-skills. Sanitization is a sync step — never push private paths/names.
 
 ## License
 
