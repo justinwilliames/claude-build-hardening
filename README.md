@@ -1,3 +1,5 @@
+> **⚠️ Moved (2026-07-03):** now maintained in github.com/justinwilliames/claude-skills (claude-build-hardening/) — this repo is archived.
+
 # claude-build-hardening
 
 A [Claude Code](https://docs.claude.com/en/docs/claude-code) skill that runs a structured multi-round adversarial review on a technical build spec, PRD, RFC, or design doc — to harden it before handing to engineers or to Claude Code for implementation.
